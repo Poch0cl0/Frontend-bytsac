@@ -4,6 +4,18 @@ const BACKEND = (
 ).replace(/\/$/, "");
 
 module.exports = async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, Accept, X-Requested-With"
+  );
+
+  if (req.method === "OPTIONS") {
+    res.status(204).end();
+    return;
+  }
+
   const rawPath = req.query.path;
   const suffix = Array.isArray(rawPath) ? rawPath.join("/") : rawPath || "";
 
@@ -11,7 +23,9 @@ module.exports = async function handler(req, res) {
   delete query.path;
   const qs = new URLSearchParams(
     Object.entries(query).flatMap(([key, value]) =>
-      Array.isArray(value) ? value.map((v) => [key, v]) : [[key, String(value)]]
+      Array.isArray(value)
+        ? value.map((v) => [key, String(v)])
+        : [[key, String(value)]]
     )
   ).toString();
 
@@ -43,6 +57,7 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     res.status(502).json({
       message: "No se pudo conectar al backend",
+      backend: BACKEND,
       target,
       error: String(error && error.message ? error.message : error),
     });
