@@ -4,11 +4,7 @@
   "outputDirectory": "build",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "http://m0w8c4kc4ggg8cws4wccc04w.46.224.176.169.sslip.io/api/:path*"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
