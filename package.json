@@ -42,10 +42,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "preinstall": "npx npm-force-resolutions"
+    "deploy": "gh-pages -d build"
   },
-  "resolutions": {
+  "overrides": {
     "react-error-overlay": "6.0.9"
   },
   "eslintConfig": {
