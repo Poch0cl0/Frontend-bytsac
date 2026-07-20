@@ -2,5 +2,14 @@
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "CI=false npm run build",
   "outputDirectory": "build",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://m0w8c4kc4ggg8cws4wccc04w.46.224.176.169.sslip.io/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
